@@ -1,0 +1,230 @@
+{
+  "entities": {
+    "Program": {
+      "title": "Program",
+      "description": "Kegiatan dan agenda pelayanan dari Lingkungan atau Kategorial Paroki",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of program"
+        },
+        "entityId": {
+          "type": "string",
+          "description": "ID of Lingkungan or Kategorial"
+        },
+        "entityType": {
+          "type": "string",
+          "enum": ["lingkungan", "kategorial"],
+          "description": "Entity classification"
+        },
+        "entityName": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Name of Lingkungan or Kategorial"
+        },
+        "namaKegiatan": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Name of activity"
+        },
+        "deskripsi": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Activity details"
+        },
+        "kategori": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Category of activity"
+        },
+        "tanggal": {
+          "type": "string",
+          "description": "Event date in YYYY-MM-DD"
+        },
+        "waktu": {
+          "type": "string",
+          "description": "Event time in HH:mm"
+        },
+        "lokasi": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Location of event"
+        },
+        "penanggungJawab": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Person in charge"
+        },
+        "kontakPJ": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Contact number"
+        },
+        "estimasiPeserta": {
+          "type": "number",
+          "description": "Estimated attendee count"
+        },
+        "anggaranBiaya": {
+          "type": "number",
+          "description": "Estimated budget in IDR"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["rencana", "berjalan", "selesai", "dibatalkan"],
+          "description": "Execution status"
+        },
+        "catatan": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Additional notes"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["entityId", "entityType", "entityName", "namaKegiatan", "tanggal", "lokasi", "penanggungJawab", "status"]
+    },
+    "Pengumuman": {
+      "title": "Pengumuman",
+      "description": "Warta pengumuman resmi dari Seksi Paroki dan DPPH Katedral",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of announcement"
+        },
+        "seksiId": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "ID of Seksi"
+        },
+        "seksiNama": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Name of Seksi"
+        },
+        "judul": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Title of announcement"
+        },
+        "ringkasan": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Short summary"
+        },
+        "isiLengkap": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "Full announcement text"
+        },
+        "tanggalMulai": {
+          "type": "string",
+          "description": "Start date"
+        },
+        "tanggalSelesai": {
+          "type": "string",
+          "description": "Expiry date"
+        },
+        "prioritas": {
+          "type": "string",
+          "enum": ["biasa", "penting", "mendesak"],
+          "description": "Priority tag"
+        },
+        "penanggungJawab": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Person in charge"
+        },
+        "kontak": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Contact number"
+        },
+        "lampiranInfo": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Attachment or brochure info"
+        },
+        "gambarUrl": {
+          "type": "string",
+          "description": "Picture URL or base64 image data"
+        },
+        "targetAudiens": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Target audience"
+        },
+        "isPublished": {
+          "type": "boolean",
+          "description": "Publication status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["seksiId", "seksiNama", "judul", "isiLengkap", "tanggalMulai", "prioritas", "penanggungJawab"]
+    },
+    "Lingkungan": {
+      "title": "Lingkungan",
+      "description": "Data dan pengurus 14 Lingkungan Paroki Katedral Medan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "kode": { "type": "string" },
+        "nama": { "type": "string" },
+        "wilayah": { "type": "string" },
+        "ketuaLingkungan": { "type": "string" },
+        "kontak": { "type": "string" },
+        "jumlahKk": { "type": "number" },
+        "jumlahJiwa": { "type": "number" },
+        "pin": { "type": "string" },
+        "deskripsi": { "type": "string" }
+      },
+      "required": ["id", "kode", "nama"]
+    },
+    "Kategorial": {
+      "title": "Kategorial",
+      "description": "Data dan pengurus 7 Kelompok Kategorial Paroki Katedral Medan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "kode": { "type": "string" },
+        "nama": { "type": "string" },
+        "bidang": { "type": "string" },
+        "ketua": { "type": "string" },
+        "pendamping": { "type": "string" },
+        "kontak": { "type": "string" },
+        "jadwalRutin": { "type": "string" },
+        "pin": { "type": "string" },
+        "deskripsi": { "type": "string" }
+      },
+      "required": ["id", "kode", "nama"]
+    }
+  },
+  "firestore": {
+    "/programs/{programId}": {
+      "schema": { "$ref": "#/entities/Program" },
+      "description": "Koleksi kegiatan dan program 14 Lingkungan dan 7 Kategorial"
+    },
+    "/pengumuman/{pengumumanId}": {
+      "schema": { "$ref": "#/entities/Pengumuman" },
+      "description": "Koleksi warta dan pengumuman Seksi Paroki Katedral"
+    },
+    "/lingkungan/{lingkunganId}": {
+      "schema": { "$ref": "#/entities/Lingkungan" },
+      "description": "Data profil dan pengurus 14 Lingkungan"
+    },
+    "/kategorial/{kategorialId}": {
+      "schema": { "$ref": "#/entities/Kategorial" },
+      "description": "Data profil dan pengurus 7 Kategorial"
+    }
+  }
+}

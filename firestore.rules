@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to validate ID
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Program validation
+    function isValidProgram(data) {
+      return data.namaKegiatan is string && data.namaKegiatan.size() > 0 && data.namaKegiatan.size() <= 255
+        && data.entityId is string && data.entityId.size() > 0
+        && data.entityType in ['lingkungan', 'kategorial']
+        && data.entityName is string && data.entityName.size() <= 200
+        && data.status in ['rencana', 'berjalan', 'selesai', 'dibatalkan'];
+    }
+
+    // Pengumuman validation
+    function isValidPengumuman(data) {
+      return data.judul is string && data.judul.size() > 0 && data.judul.size() <= 255
+        && data.isiLengkap is string && data.isiLengkap.size() > 0 && data.isiLengkap.size() <= 1500000
+        && data.seksiId is string && data.seksiId.size() > 0
+        && data.prioritas in ['biasa', 'penting', 'mendesak'];
+    }
+
+    // Programs Collection
+    match /programs/{programId} {
+      allow read: if true;
+      allow create, update: if isValidId(programId) && isValidProgram(request.resource.data);
+      allow delete: if isValidId(programId);
+    }
+
+    // Pengumuman Warta Collection
+    match /pengumuman/{pengumumanId} {
+      allow read: if true;
+      allow create, update: if isValidId(pengumumanId) && isValidPengumuman(request.resource.data);
+      allow delete: if isValidId(pengumumanId);
+    }
+
+    // Lingkungan Collection
+    match /lingkungan/{lingkunganId} {
+      allow read: if true;
+      allow write: if isValidId(lingkunganId);
+    }
+
+    // Kategorial Collection
+    match /kategorial/{kategorialId} {
+      allow read: if true;
+      allow write: if isValidId(kategorialId);
+    }
+
+    // Connection testing
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

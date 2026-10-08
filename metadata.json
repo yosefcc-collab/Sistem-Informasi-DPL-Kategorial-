@@ -1,0 +1,6 @@
+{
+  "name": "SI-PAROKI Katedral Medan",
+  "description": "Sistem Informasi Program Kegiatan Lingkungan, Kategorial, dan Warta Pengumuman Seksi Paroki St. Perawan Maria Yang Dikandung Tanpa Noda Katedral Keuskupan Agung Medan",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
